@@ -1,0 +1,53 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Richard Yu <yurichard3839@gmail.com>
+# This file is distributed under the same license as the AudioPlaybackConnector package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: AudioPlaybackConnector\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-06-09 03:17+0800\n"
+"PO-Revision-Date: 2020-06-09 03:22+0800\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Last-Translator: Richard Yu <yurichard3839@gmail.com>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#: AudioPlaybackConnector.cpp:37
+msgid "Unsupported Operating System"
+msgstr "不支持的操作系统"
+
+#: AudioPlaybackConnector.cpp:37
+msgid ""
+"AudioPlaybackConnector is not supported on this on this operating system "
+"version."
+msgstr "此操作系统版本不支持 AudioPlaybackConnector。"
+
+#: AudioPlaybackConnector.cpp:74
+msgid "AudioPlaybackConnector"
+msgstr ""
+
+#: AudioPlaybackConnector.cpp:217
+msgid "Connecting"
+msgstr "正在连接"
+
+#: AudioPlaybackConnector.cpp:252
+msgid "The request timed out"
+msgstr "请求超时"
+
+#: AudioPlaybackConnector.cpp:256
+msgid "The operation was denied by the system"
+msgstr "操作被系统拒绝"
+
+#: AudioPlaybackConnector.cpp:267
+msgid "Unknown error"
+msgstr "未知错误"
+
+#: AudioPlaybackConnector.cpp:292
+msgid "Connected"
+msgstr "已连接"
