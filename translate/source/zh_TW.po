@@ -7,30 +7,28 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AudioPlaybackConnector\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-09 10:06+0800\n"
-"PO-Revision-Date: 2020-06-09 10:09+0800\n"
+"POT-Creation-Date: 2020-06-13 02:49+0800\n"
+"PO-Revision-Date: 2020-06-13 02:53+0800\n"
+"Last-Translator: Richard Yu <yurichard3839@gmail.com>\n"
 "Language-Team: \n"
+"Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3.1\n"
-"Last-Translator: Yi-Jyun Pan <pan93412@gmail.com>\n"
+"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Language: zh_TW\n"
 
 #: AudioPlaybackConnector.cpp:37
 msgid "Unsupported Operating System"
 msgstr "作業系統不支援"
 
 #: AudioPlaybackConnector.cpp:37
-msgid ""
-"AudioPlaybackConnector is not supported on this on this operating system "
-"version."
+msgid "AudioPlaybackConnector is not supported on this operating system version."
 msgstr "AudioPlaybackConnector 不支援此作業系統版本。"
 
 #: AudioPlaybackConnector.cpp:74
 msgid "AudioPlaybackConnector"
-msgstr "AudioPlaybackConnector"
+msgstr ""
 
 #: AudioPlaybackConnector.cpp:217
 msgid "Connecting"

@@ -34,7 +34,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	}
 	if (!supported)
 	{
-		TaskDialog(nullptr, nullptr, _(L"Unsupported Operating System"), nullptr, _(L"AudioPlaybackConnector is not supported on this on this operating system version."), TDCBF_OK_BUTTON, TD_ERROR_ICON, nullptr);
+		TaskDialog(nullptr, nullptr, _(L"Unsupported Operating System"), nullptr, _(L"AudioPlaybackConnector is not supported on this operating system version."), TDCBF_OK_BUTTON, TD_ERROR_ICON, nullptr);
 		return EXIT_FAILURE;
 	}
 
