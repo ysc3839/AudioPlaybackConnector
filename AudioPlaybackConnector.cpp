@@ -164,38 +164,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 void SetupMenu()
 {
-	auto hRes = FindResourceExW(g_hInst, L"XAML", MAKEINTRESOURCEW(1), GetThreadUILanguage());
-	FAIL_FAST_LAST_ERROR_IF_NULL(hRes);
+	FontIcon fontIcon;
+	fontIcon.Glyph(L"\xE8BB");
 
-	auto size = SizeofResource(g_hInst, hRes);
-	FAIL_FAST_LAST_ERROR_IF(size == 0);
+	MenuFlyoutItem item;
+	item.Text(_(L"Exit"));
+	item.Icon(fontIcon);
+	item.Click([](auto, auto) { PostMessageW(g_hWnd, WM_CLOSE, 0, 0); });
 
-	auto hResData = LoadResource(g_hInst, hRes);
-	FAIL_FAST_LAST_ERROR_IF_NULL(hResData);
-
-	auto xamlData = reinterpret_cast<const wchar_t*>(LockResource(hResData));
-	FAIL_FAST_IF_NULL_ALLOC(xamlData);
-
-	auto xamlMenu = winrt::Windows::UI::Xaml::Markup::XamlReader::Load(std::wstring_view(xamlData, (size / sizeof(wchar_t)) - 1)).as<MenuFlyout>();
-	xamlMenu.Placement(Primitives::FlyoutPlacementMode::TopEdgeAlignedLeft);
-
-	const std::unordered_map<std::wstring_view, RoutedEventHandler> actions = {
-		{ L"Exit", [](auto, auto) { PostMessageW(g_hWnd, WM_CLOSE, 0, 0); } }
-	};
-	for (auto base : xamlMenu.Items())
-	{
-		auto item = base.try_as<MenuFlyoutItem>();
-		if (item)
-		{
-			auto i = actions.find(item.Name());
-			if (i != actions.end())
-			{
-				item.Click(i->second);
-			}
-		}
-	}
-
-	xamlMenu.Opened([](auto sender, auto) {
+	MenuFlyout menu;
+	menu.Items().Append(item);
+	menu.Placement(Primitives::FlyoutPlacementMode::TopEdgeAlignedLeft);
+	menu.Opened([](auto sender, auto) {
 		auto menuItems = sender.as<MenuFlyout>().Items();
 		auto itemsCount = menuItems.Size();
 		if (itemsCount > 0)
@@ -204,11 +184,11 @@ void SetupMenu()
 		}
 		g_menuFocusState = FocusState::Unfocused;
 	});
-	xamlMenu.Closed([](auto sender, auto) {
+	menu.Closed([](auto sender, auto) {
 		SetWindowPos(g_hWnd, nullptr, 0, 0, 0, 0, SWP_NOZORDER | SWP_HIDEWINDOW);
 	});
 
-	g_xamlMenu = xamlMenu;
+	g_xamlMenu = menu;
 }
 
 winrt::fire_and_forget DevicePicker_DeviceSelected(DevicePicker sender, DeviceSelectedEventArgs args)
