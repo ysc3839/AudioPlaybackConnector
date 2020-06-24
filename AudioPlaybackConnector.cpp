@@ -62,9 +62,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	winrt::check_hresult(desktopSourceNative2->get_WindowHandle(&g_hWndXaml));
 
 	g_xamlCanvas = Canvas();
-	// When XAML window size is small, the menu will be shrinked. Here we set its size to a absolute big value.
-	g_xamlCanvas.Width(4096);
-	g_xamlCanvas.Height(4096);
 	desktopSource.Content(g_xamlCanvas);
 
 	SetupMenu();
