@@ -42,5 +42,4 @@ if __name__ == '__main__':
         sys.exit()
     infile = open(sys.argv[1], 'rb')
     outfile = open(sys.argv[2], 'wb')
-    print(sys.argv, infile, outfile)
     po2ymo(infile, outfile)
