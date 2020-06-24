@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from translate.convert import convert
 from translate.storage import po
 from xml.dom.minidom import parse, Node

@@ -1,11 +1,11 @@
 #!/bin/sh
 
-pipenv run po2ymo.py ./source/zh_CN.po ./generated/zh_CN.ymo
-pipenv run po2ymo.py ./source/zh_TW.po ./generated/zh_TW.ymo
+./po2ymo.py ./source/zh_CN.po ./generated/zh_CN.ymo
+./po2ymo.py ./source/zh_TW.po ./generated/zh_TW.ymo
 
-pipenv run xamlmin.py ../Menu.xaml ./generated/en_US.xaml
-pipenv run po2xaml.py ./xaml/zh_CN.po ./generated/zh_CN.xaml -t ../Menu.xaml
-#pipenv run po2xaml.py ./xaml/zh_TW.po ./generated/zh_TW.xaml -t ../Menu.xaml
+./xamlmin.py ../Menu.xaml ./generated/en_US.xaml
+./po2xaml.py ./xaml/zh_CN.po ./generated/zh_CN.xaml -t ../Menu.xaml
+#./po2xaml.py ./xaml/zh_TW.po ./generated/zh_TW.xaml -t ../Menu.xaml
 
 echo '#include "../../targetver.h"' > ./generated/translate.rc
 echo '#include "windows.h"' >> ./generated/translate.rc

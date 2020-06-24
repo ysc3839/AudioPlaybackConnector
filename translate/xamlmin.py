@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import sys
 from xml.dom.minidom import parse, Node
 
