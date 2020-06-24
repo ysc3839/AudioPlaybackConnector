@@ -70,8 +70,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,1,0
- PRODUCTVERSION 1,0,1,0
+ FILEVERSION 1,0,2,1
+ PRODUCTVERSION 1,0,2,1
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -88,12 +88,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "Richard Yu"
             VALUE "FileDescription", "AudioPlaybackConnector"
-            VALUE "FileVersion", "1.0.1.0"
+            VALUE "FileVersion", "1.0.2.1"
             VALUE "InternalName", "AudioPlaybackConnector.exe"
             VALUE "LegalCopyright", "Copyright (C) 2020 Richard Yu"
             VALUE "OriginalFilename", "AudioPlaybackConnector.exe"
             VALUE "ProductName", "AudioPlaybackConnector"
-            VALUE "ProductVersion", "1.0.1.0"
+            VALUE "ProductVersion", "1.0.2.1"
         END
     END
     BLOCK "VarFileInfo"
