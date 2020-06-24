@@ -30,6 +30,10 @@ jobs:
           msbuild AudioPlaybackConnector.sln "-p:Configuration=Release;Platform=x64" }
         Start-Job -Init ([ScriptBlock]::Create("Set-Location '$pwd'")) -Script {
           msbuild AudioPlaybackConnector.sln "-p:Configuration=Release;Platform=x86" }
+        Start-Job -Init ([ScriptBlock]::Create("Set-Location '$pwd'")) -Script {
+          msbuild AudioPlaybackConnector.sln "-p:Configuration=Release;Platform=ARM64" }
+        Start-Job -Init ([ScriptBlock]::Create("Set-Location '$pwd'")) -Script {
+          msbuild AudioPlaybackConnector.sln "-p:Configuration=Release;Platform=ARM" }
         Get-Job | Wait-Job | Receive-Job
       shell: powershell
     - uses: actions/upload-artifact@v2
@@ -48,6 +52,22 @@ jobs:
       with:
         name: AudioPlaybackConnector32
         path: Release/AudioPlaybackConnector32.pdb
+    - uses: actions/upload-artifact@v2
+      with:
+        name: AudioPlaybackConnectorARM64
+        path: ARM64/Release/AudioPlaybackConnectorARM64.exe
+    - uses: actions/upload-artifact@v2
+      with:
+        name: AudioPlaybackConnectorARM64
+        path: ARM64/Release/AudioPlaybackConnectorARM64.pdb
+    - uses: actions/upload-artifact@v2
+      with:
+        name: AudioPlaybackConnectorARM
+        path: ARM/Release/AudioPlaybackConnectorARM.exe
+    - uses: actions/upload-artifact@v2
+      with:
+        name: AudioPlaybackConnectorARM
+        path: ARM/Release/AudioPlaybackConnectorARM.pdb
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
@@ -75,4 +95,22 @@ jobs:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: Release/AudioPlaybackConnector32.exe
         asset_name: AudioPlaybackConnector32.exe
+        asset_content_type: application/octet-stream
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ARM64/Release/AudioPlaybackConnectorARM64.exe
+        asset_name: AudioPlaybackConnectorARM64.exe
+        asset_content_type: application/octet-stream
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ARM/Release/AudioPlaybackConnectorARM.exe
+        asset_name: AudioPlaybackConnectorARM.exe
         asset_content_type: application/octet-stream
