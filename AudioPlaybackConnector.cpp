@@ -140,11 +140,17 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			if (g_menuFocusState == FocusState::Unfocused)
 				g_menuFocusState = FocusState::Keyboard;
 
-			SetWindowPos(g_hWndXaml, 0, GET_X_LPARAM(wParam), GET_Y_LPARAM(wParam), 0, 0, SWP_NOZORDER | SWP_SHOWWINDOW);
+			auto dpi = GetDpiForWindow(hWnd);
+			Point point = {
+				static_cast<float>(GET_X_LPARAM(wParam) * USER_DEFAULT_SCREEN_DPI / dpi),
+				static_cast<float>(GET_Y_LPARAM(wParam) * USER_DEFAULT_SCREEN_DPI / dpi)
+			};
+
+			SetWindowPos(g_hWndXaml, 0, 0, 0, 0, 0, SWP_NOZORDER | SWP_SHOWWINDOW);
 			SetWindowPos(g_hWnd, HWND_TOPMOST, 0, 0, 1, 1, SWP_SHOWWINDOW);
 			SetForegroundWindow(hWnd);
 
-			g_xamlMenu.ShowAt(g_xamlCanvas);
+			g_xamlMenu.ShowAt(g_xamlCanvas, point);
 		}
 		break;
 		}
@@ -171,7 +177,6 @@ void SetupMenu()
 
 	MenuFlyout menu;
 	menu.Items().Append(item);
-	menu.Placement(Primitives::FlyoutPlacementMode::TopEdgeAlignedLeft);
 	menu.Opened([](auto sender, auto) {
 		auto menuItems = sender.as<MenuFlyout>().Items();
 		auto itemsCount = menuItems.Size();
