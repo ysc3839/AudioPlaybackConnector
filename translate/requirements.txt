@@ -1,0 +1,2 @@
+six==1.14.0
+-e git+https://github.com/ysc3839/translate.git@3070162bb995264f07acaf479672c229336682ca#egg=translate_toolkit
