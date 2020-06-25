@@ -15,6 +15,7 @@ HINSTANCE g_hInst;
 HWND g_hWnd;
 HWND g_hWndXaml;
 Canvas g_xamlCanvas = nullptr;
+Flyout g_xamlFlyout = nullptr;
 MenuFlyout g_xamlMenu = nullptr;
 FocusState g_menuFocusState = FocusState::Unfocused;
 DevicePicker g_devicePicker = nullptr;

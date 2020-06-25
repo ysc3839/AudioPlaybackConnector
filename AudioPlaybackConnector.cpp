@@ -2,6 +2,7 @@
 #include "AudioPlaybackConnector.h"
 
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
+void SetupFlyout();
 void SetupMenu();
 void SetupDevicePicker();
 void UpdateNotifyIcon();
@@ -64,6 +65,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	g_xamlCanvas = Canvas();
 	desktopSource.Content(g_xamlCanvas);
 
+	SetupFlyout();
 	SetupMenu();
 	SetupDevicePicker();
 
@@ -165,6 +167,28 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
+void SetupFlyout()
+{
+	TextBlock textBlock;
+	textBlock.Text(_(L"All connections will be closed.\nExit anyway?"));
+	textBlock.Margin({ 0, 0, 0, 12 });
+
+	Button button;
+	button.Content(winrt::box_value(_(L"Exit")));
+	button.HorizontalAlignment(HorizontalAlignment::Right);
+	button.Click([](auto, auto) { PostMessageW(g_hWnd, WM_CLOSE, 0, 0); });
+
+	StackPanel stackPanel;
+	stackPanel.Children().Append(textBlock);
+	stackPanel.Children().Append(button);
+
+	Flyout flyout;
+	flyout.ShouldConstrainToRootBounds(false);
+	flyout.Content(stackPanel);
+
+	g_xamlFlyout = flyout;
+}
+
 void SetupMenu()
 {
 	FontIcon fontIcon;
@@ -173,7 +197,29 @@ void SetupMenu()
 	MenuFlyoutItem item;
 	item.Text(_(L"Exit"));
 	item.Icon(fontIcon);
-	item.Click([](auto, auto) { PostMessageW(g_hWnd, WM_CLOSE, 0, 0); });
+	item.Click([](auto, auto) {
+		if (g_audioPlaybackConnections.size() == 0)
+		{
+			PostMessageW(g_hWnd, WM_CLOSE, 0, 0);
+			return;
+		}
+
+		RECT iconRect;
+		auto hr = Shell_NotifyIconGetRect(&g_niid, &iconRect);
+		if (FAILED(hr))
+		{
+			LOG_HR(hr);
+			return;
+		}
+
+		auto dpi = GetDpiForWindow(g_hWnd);
+
+		SetWindowPos(g_hWnd, HWND_TOPMOST, iconRect.left, iconRect.top, 0, 0, SWP_HIDEWINDOW);
+		g_xamlCanvas.Width(static_cast<float>((iconRect.right - iconRect.left) * USER_DEFAULT_SCREEN_DPI / dpi));
+		g_xamlCanvas.Height(static_cast<float>((iconRect.bottom - iconRect.top) * USER_DEFAULT_SCREEN_DPI / dpi));
+
+		g_xamlFlyout.ShowAt(g_xamlCanvas);
+	});
 
 	MenuFlyout menu;
 	menu.Items().Append(item);
@@ -187,7 +233,7 @@ void SetupMenu()
 		g_menuFocusState = FocusState::Unfocused;
 	});
 	menu.Closed([](auto sender, auto) {
-		SetWindowPos(g_hWnd, nullptr, 0, 0, 0, 0, SWP_NOZORDER | SWP_HIDEWINDOW);
+		ShowWindow(g_hWnd, SW_HIDE);
 	});
 
 	g_xamlMenu = menu;
