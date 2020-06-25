@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AudioPlaybackConnector\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-13 02:49+0800\n"
+"POT-Creation-Date: 2020-06-25 08:26+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,35 +17,45 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: AudioPlaybackConnector.cpp:37
+#: AudioPlaybackConnector.cpp:38
 msgid "Unsupported Operating System"
 msgstr ""
 
-#: AudioPlaybackConnector.cpp:37
+#: AudioPlaybackConnector.cpp:38
 msgid ""
 "AudioPlaybackConnector is not supported on this operating system version."
 msgstr ""
 
-#: AudioPlaybackConnector.cpp:74
+#: AudioPlaybackConnector.cpp:73
 msgid "AudioPlaybackConnector"
 msgstr ""
 
-#: AudioPlaybackConnector.cpp:217
+#: AudioPlaybackConnector.cpp:173
+msgid ""
+"All connections will be closed.\n"
+"Exit anyway?"
+msgstr ""
+
+#: AudioPlaybackConnector.cpp:177 AudioPlaybackConnector.cpp:198
+msgid "Exit"
+msgstr ""
+
+#: AudioPlaybackConnector.cpp:245
 msgid "Connecting"
 msgstr ""
 
-#: AudioPlaybackConnector.cpp:252
+#: AudioPlaybackConnector.cpp:280
 msgid "The request timed out"
 msgstr ""
 
-#: AudioPlaybackConnector.cpp:256
+#: AudioPlaybackConnector.cpp:284
 msgid "The operation was denied by the system"
 msgstr ""
 
-#: AudioPlaybackConnector.cpp:267
+#: AudioPlaybackConnector.cpp:295
 msgid "Unknown error"
 msgstr ""
 
-#: AudioPlaybackConnector.cpp:292
+#: AudioPlaybackConnector.cpp:320
 msgid "Connected"
 msgstr ""
