@@ -191,13 +191,24 @@ void SetupFlyout()
 
 void SetupMenu()
 {
-	FontIcon fontIcon;
-	fontIcon.Glyph(L"\xE8BB");
+	// https://docs.microsoft.com/en-us/windows/uwp/design/style/segoe-ui-symbol-font
+	FontIcon settingsIcon;
+	settingsIcon.Glyph(L"\xE713");
 
-	MenuFlyoutItem item;
-	item.Text(_(L"Exit"));
-	item.Icon(fontIcon);
-	item.Click([](auto, auto) {
+	MenuFlyoutItem settingsItem;
+	settingsItem.Text(_(L"Bluetooth Settings"));
+	settingsItem.Icon(settingsIcon);
+	settingsItem.Click([](auto, auto) {
+		winrt::Windows::System::Launcher::LaunchUriAsync(Uri(L"ms-settings:bluetooth"));
+	});
+
+	FontIcon closeIcon;
+	closeIcon.Glyph(L"\xE8BB");
+
+	MenuFlyoutItem exitItem;
+	exitItem.Text(_(L"Exit"));
+	exitItem.Icon(closeIcon);
+	exitItem.Click([](auto, auto) {
 		if (g_audioPlaybackConnections.size() == 0)
 		{
 			PostMessageW(g_hWnd, WM_CLOSE, 0, 0);
@@ -222,7 +233,8 @@ void SetupMenu()
 	});
 
 	MenuFlyout menu;
-	menu.Items().Append(item);
+	menu.Items().Append(settingsItem);
+	menu.Items().Append(exitItem);
 	menu.Opened([](auto sender, auto) {
 		auto menuItems = sender.as<MenuFlyout>().Items();
 		auto itemsCount = menuItems.Size();
