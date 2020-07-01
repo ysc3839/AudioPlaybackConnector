@@ -7,45 +7,57 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AudioPlaybackConnector\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-13 02:49+0800\n"
-"PO-Revision-Date: 2020-06-13 02:53+0800\n"
+"POT-Creation-Date: 2020-06-25 08:26+0800\n"
+"PO-Revision-Date: 2020-07-02 00:31+0800\n"
 "Last-Translator: Richard Yu <yurichard3839@gmail.com>\n"
 "Language-Team: \n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.3.1\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: AudioPlaybackConnector.cpp:37
+#: AudioPlaybackConnector.cpp:38
 msgid "Unsupported Operating System"
 msgstr "不支持的操作系统"
 
-#: AudioPlaybackConnector.cpp:37
+#: AudioPlaybackConnector.cpp:38
 msgid "AudioPlaybackConnector is not supported on this operating system version."
 msgstr "此操作系统版本不支持 AudioPlaybackConnector。"
 
-#: AudioPlaybackConnector.cpp:74
+#: AudioPlaybackConnector.cpp:73
 msgid "AudioPlaybackConnector"
 msgstr ""
 
-#: AudioPlaybackConnector.cpp:217
+#: AudioPlaybackConnector.cpp:173
+msgid ""
+"All connections will be closed.\n"
+"Exit anyway?"
+msgstr ""
+"所有连接都将关闭。\n"
+"仍然要退出吗？"
+
+#: AudioPlaybackConnector.cpp:177 AudioPlaybackConnector.cpp:198
+msgid "Exit"
+msgstr "退出"
+
+#: AudioPlaybackConnector.cpp:245
 msgid "Connecting"
 msgstr "正在连接"
 
-#: AudioPlaybackConnector.cpp:252
+#: AudioPlaybackConnector.cpp:280
 msgid "The request timed out"
 msgstr "请求超时"
 
-#: AudioPlaybackConnector.cpp:256
+#: AudioPlaybackConnector.cpp:284
 msgid "The operation was denied by the system"
 msgstr "操作被系统拒绝"
 
-#: AudioPlaybackConnector.cpp:267
+#: AudioPlaybackConnector.cpp:295
 msgid "Unknown error"
 msgstr "未知错误"
 
-#: AudioPlaybackConnector.cpp:292
+#: AudioPlaybackConnector.cpp:320
 msgid "Connected"
 msgstr "已连接"
