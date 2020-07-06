@@ -333,7 +333,9 @@
     <ClInclude Include="AudioPlaybackConnector.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="SettingsUtil.hpp" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Util.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AudioPlaybackConnector.cpp" />

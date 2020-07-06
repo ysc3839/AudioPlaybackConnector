@@ -21,6 +21,7 @@
 #include <cstdlib>
 #include <cstdint>
 #include <unordered_map>
+#include <filesystem>
 
 // wil
 #ifndef _DEBUG
@@ -36,6 +37,7 @@
 #undef GetCurrentTime
 
 #include <winrt/base.h>
+#include <winrt/Windows.Data.Json.h>
 #include <winrt/Windows.Devices.Enumeration.h>
 #include <winrt/Windows.Foundation.Collections.h>
 #include <winrt/Windows.Foundation.Metadata.h>
