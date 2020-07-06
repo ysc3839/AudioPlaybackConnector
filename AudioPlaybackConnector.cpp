@@ -176,7 +176,7 @@ void SetupFlyout()
 	Button button;
 	button.Content(winrt::box_value(_(L"Exit")));
 	button.HorizontalAlignment(HorizontalAlignment::Right);
-	button.Click([](auto, auto) { PostMessageW(g_hWnd, WM_CLOSE, 0, 0); });
+	button.Click([](const auto&, const auto&) { PostMessageW(g_hWnd, WM_CLOSE, 0, 0); });
 
 	StackPanel stackPanel;
 	stackPanel.Children().Append(textBlock);
@@ -198,7 +198,7 @@ void SetupMenu()
 	MenuFlyoutItem settingsItem;
 	settingsItem.Text(_(L"Bluetooth Settings"));
 	settingsItem.Icon(settingsIcon);
-	settingsItem.Click([](auto, auto) {
+	settingsItem.Click([](const auto&, const auto&) {
 		winrt::Windows::System::Launcher::LaunchUriAsync(Uri(L"ms-settings:bluetooth"));
 	});
 
@@ -208,7 +208,7 @@ void SetupMenu()
 	MenuFlyoutItem exitItem;
 	exitItem.Text(_(L"Exit"));
 	exitItem.Icon(closeIcon);
-	exitItem.Click([](auto, auto) {
+	exitItem.Click([](const auto&, const auto&) {
 		if (g_audioPlaybackConnections.size() == 0)
 		{
 			PostMessageW(g_hWnd, WM_CLOSE, 0, 0);
@@ -235,7 +235,7 @@ void SetupMenu()
 	MenuFlyout menu;
 	menu.Items().Append(settingsItem);
 	menu.Items().Append(exitItem);
-	menu.Opened([](auto sender, auto) {
+	menu.Opened([](const auto& sender, const auto&) {
 		auto menuItems = sender.as<MenuFlyout>().Items();
 		auto itemsCount = menuItems.Size();
 		if (itemsCount > 0)
@@ -244,14 +244,14 @@ void SetupMenu()
 		}
 		g_menuFocusState = FocusState::Unfocused;
 	});
-	menu.Closed([](auto sender, auto) {
+	menu.Closed([](const auto&, const auto&) {
 		ShowWindow(g_hWnd, SW_HIDE);
 	});
 
 	g_xamlMenu = menu;
 }
 
-winrt::fire_and_forget DevicePicker_DeviceSelected(DevicePicker sender, DeviceSelectedEventArgs args)
+winrt::fire_and_forget DevicePicker_DeviceSelected(DevicePicker sender, DeviceSelectedEventArgs const& args)
 {
 	auto selectedDevice = args.SelectedDevice();
 	sender.SetDisplayStatus(selectedDevice, _(L"Connecting"), DevicePickerDisplayStatusOptions::ShowProgress | DevicePickerDisplayStatusOptions::ShowDisconnectButton);
@@ -266,7 +266,7 @@ winrt::fire_and_forget DevicePicker_DeviceSelected(DevicePicker sender, DeviceSe
 		{
 			g_audioPlaybackConnections.emplace(selectedDevice.Id(), std::pair(selectedDevice, connection));
 
-			connection.StateChanged([](AudioPlaybackConnection sender, auto) {
+			connection.StateChanged([](const auto& sender, const auto&) {
 				if (sender.State() == AudioPlaybackConnectionState::Closed)
 				{
 					auto it = g_audioPlaybackConnections.find(std::wstring(sender.DeviceId()));
@@ -349,11 +349,11 @@ void SetupDevicePicker()
 	winrt::check_hresult(g_devicePicker.as<IInitializeWithWindow>()->Initialize(g_hWnd));
 
 	g_devicePicker.Filter().SupportedDeviceSelectors().Append(AudioPlaybackConnection::GetDeviceSelector());
-	g_devicePicker.DevicePickerDismissed([](auto sender, auto) {
+	g_devicePicker.DevicePickerDismissed([](const auto&, const auto&) {
 		SetWindowPos(g_hWnd, nullptr, 0, 0, 0, 0, SWP_NOZORDER | SWP_HIDEWINDOW);
 	});
 	g_devicePicker.DeviceSelected(DevicePicker_DeviceSelected);
-	g_devicePicker.DisconnectButtonClicked([](auto sender, auto args) {
+	g_devicePicker.DisconnectButtonClicked([](const auto& sender, const auto& args) {
 		auto device = args.Device();
 		auto it = g_audioPlaybackConnections.find(std::wstring(device.Id()));
 		if (it != g_audioPlaybackConnections.end())
