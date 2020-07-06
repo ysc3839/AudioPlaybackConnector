@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AudioPlaybackConnector\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-25 08:26+0800\n"
-"PO-Revision-Date: 2020-07-02 00:31+0800\n"
+"POT-Creation-Date: 2020-07-06 19:07+0800\n"
+"PO-Revision-Date: 2020-07-06 19:09+0800\n"
 "Last-Translator: Richard Yu <yurichard3839@gmail.com>\n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -18,19 +18,19 @@ msgstr ""
 "X-Generator: Poedit 2.3.1\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: AudioPlaybackConnector.cpp:38
+#: AudioPlaybackConnector.cpp:39
 msgid "Unsupported Operating System"
 msgstr "不支持的操作系统"
 
-#: AudioPlaybackConnector.cpp:38
+#: AudioPlaybackConnector.cpp:39
 msgid "AudioPlaybackConnector is not supported on this operating system version."
 msgstr "此操作系统版本不支持 AudioPlaybackConnector。"
 
-#: AudioPlaybackConnector.cpp:73
+#: AudioPlaybackConnector.cpp:75
 msgid "AudioPlaybackConnector"
 msgstr ""
 
-#: AudioPlaybackConnector.cpp:173
+#: AudioPlaybackConnector.cpp:196
 msgid ""
 "All connections will be closed.\n"
 "Exit anyway?"
@@ -38,26 +38,34 @@ msgstr ""
 "所有连接都将关闭。\n"
 "仍然要退出吗？"
 
-#: AudioPlaybackConnector.cpp:177 AudioPlaybackConnector.cpp:198
+#: AudioPlaybackConnector.cpp:201
+msgid "Reconnect on next start"
+msgstr "下次启动时重新连接"
+
+#: AudioPlaybackConnector.cpp:204 AudioPlaybackConnector.cpp:240
 msgid "Exit"
 msgstr "退出"
 
-#: AudioPlaybackConnector.cpp:245
+#: AudioPlaybackConnector.cpp:230
+msgid "Bluetooth Settings"
+msgstr "蓝牙设置"
+
+#: AudioPlaybackConnector.cpp:287
 msgid "Connecting"
 msgstr "正在连接"
 
-#: AudioPlaybackConnector.cpp:280
+#: AudioPlaybackConnector.cpp:322
 msgid "The request timed out"
 msgstr "请求超时"
 
-#: AudioPlaybackConnector.cpp:284
+#: AudioPlaybackConnector.cpp:326
 msgid "The operation was denied by the system"
 msgstr "操作被系统拒绝"
 
-#: AudioPlaybackConnector.cpp:295
+#: AudioPlaybackConnector.cpp:337
 msgid "Unknown error"
 msgstr "未知错误"
 
-#: AudioPlaybackConnector.cpp:320
+#: AudioPlaybackConnector.cpp:362
 msgid "Connected"
 msgstr "已连接"
