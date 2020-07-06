@@ -35,18 +35,20 @@ msgid ""
 "All connections will be closed.\n"
 "Exit anyway?"
 msgstr ""
+"將會關閉所有連線。\n"
+"執意結束?"
 
 #: AudioPlaybackConnector.cpp:201
 msgid "Reconnect on next start"
-msgstr ""
+msgstr "下次啟動時重新連線"
 
 #: AudioPlaybackConnector.cpp:204 AudioPlaybackConnector.cpp:240
 msgid "Exit"
-msgstr ""
+msgstr "結束"
 
 #: AudioPlaybackConnector.cpp:230
 msgid "Bluetooth Settings"
-msgstr ""
+msgstr "藍牙設定"
 
 #: AudioPlaybackConnector.cpp:287
 msgid "Connecting"
