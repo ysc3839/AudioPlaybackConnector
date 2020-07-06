@@ -1,4 +1,6 @@
 # AudioPlaybackConnector
+**English** | [简体中文](https://github.com/ysc3839/AudioPlaybackConnector/blob/master/README.zh_CN.md)
+
 Bluetooth audio playback (A2DP Sink) connector for Windows 10 2004+.
 
 Microsoft added Bluetooth A2DP Sink to Windows 10 2004. However, a third-party app is required to manage connection.\
