@@ -6,6 +6,7 @@ void SetupFlyout();
 void SetupMenu();
 winrt::fire_and_forget ConnectDevice(DevicePicker, std::wstring_view);
 void SetupDevicePicker();
+void SetupSvgIcon();
 void UpdateNotifyIcon();
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
@@ -49,7 +50,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		.lpszClassName = L"AudioPlaybackConnector",
 		.hIconSm = wcex.hIcon
 	};
-	g_nid.hIcon = wcex.hIcon;
 
 	RegisterClassExW(&wcex);
 
@@ -70,6 +70,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	SetupFlyout();
 	SetupMenu();
 	SetupDevicePicker();
+	SetupSvgIcon();
 
 	g_nid.hWnd = g_niid.hWnd = g_hWnd;
 	wcscpy_s(g_nid.szTip, _(L"AudioPlaybackConnector"));
@@ -117,6 +118,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		}
 		Shell_NotifyIconW(NIM_DELETE, &g_nid);
 		PostQuitMessage(0);
+		break;
+	case WM_SETTINGCHANGE:
+		if (lParam && CompareStringOrdinal(reinterpret_cast<LPCWCH>(lParam), -1, L"ImmersiveColorSet", -1, TRUE) == CSTR_EQUAL)
+		{
+			UpdateNotifyIcon();
+		}
 		break;
 	case WM_NOTIFYICON:
 		switch (LOWORD(lParam))
@@ -403,8 +410,33 @@ void SetupDevicePicker()
 	});
 }
 
+void SetupSvgIcon()
+{
+	auto hRes = FindResourceW(g_hInst, MAKEINTRESOURCEW(1), L"SVG");
+	FAIL_FAST_LAST_ERROR_IF_NULL(hRes);
+
+	auto size = SizeofResource(g_hInst, hRes);
+	FAIL_FAST_LAST_ERROR_IF(size == 0);
+
+	auto hResData = LoadResource(g_hInst, hRes);
+	FAIL_FAST_LAST_ERROR_IF_NULL(hResData);
+
+	auto svgData = reinterpret_cast<const char*>(LockResource(hResData));
+	FAIL_FAST_IF_NULL_ALLOC(svgData);
+
+	const std::string_view svg(svgData, size);
+	const int width = GetSystemMetrics(SM_CXSMICON), height = GetSystemMetrics(SM_CYSMICON);
+
+	g_hIconLight = SvgTohIcon(svg, width, height, { 0, 0, 0, 1 });
+	g_hIconDark = SvgTohIcon(svg, width, height, { 1, 1, 1, 1 });
+}
+
 void UpdateNotifyIcon()
 {
+	DWORD value = 0, cbValue = sizeof(value);
+	LOG_IF_WIN32_ERROR(RegGetValueW(HKEY_CURRENT_USER, LR"(Software\Microsoft\Windows\CurrentVersion\Themes\Personalize)", L"AppsUseLightTheme", RRF_RT_REG_DWORD, nullptr, &value, &cbValue));
+	g_nid.hIcon = value != 0 ? g_hIconLight : g_hIconDark;
+
 	if (!Shell_NotifyIconW(NIM_MODIFY, &g_nid))
 	{
 		if (Shell_NotifyIconW(NIM_ADD, &g_nid))

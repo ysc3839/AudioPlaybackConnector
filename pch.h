@@ -16,6 +16,8 @@
 #include <commctrl.h>
 #include <shellapi.h>
 #include <shobjidl_core.h>
+#include <d2d1_3.h>
+#include <shlwapi.h>
 
 // C++ RunTime Header Files
 #include <cstdlib>

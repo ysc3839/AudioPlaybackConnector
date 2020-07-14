@@ -23,6 +23,8 @@ MenuFlyout g_xamlMenu = nullptr;
 FocusState g_menuFocusState = FocusState::Unfocused;
 DevicePicker g_devicePicker = nullptr;
 std::unordered_map<std::wstring, std::pair<DeviceInformation, AudioPlaybackConnection>> g_audioPlaybackConnections;
+HICON g_hIconLight = nullptr;
+HICON g_hIconDark = nullptr;
 NOTIFYICONDATAW g_nid = {
 	.cbSize = sizeof(g_nid),
 	.uFlags = NIF_MESSAGE | NIF_ICON | NIF_TIP | NIF_SHOWTIP,
@@ -39,3 +41,4 @@ std::vector<std::wstring> g_lastDevices;
 #include "Util.hpp"
 #include "I18n.hpp"
 #include "SettingsUtil.hpp"
+#include "Direct2DSvg.hpp"
