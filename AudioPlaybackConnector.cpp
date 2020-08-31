@@ -434,7 +434,7 @@ void SetupSvgIcon()
 void UpdateNotifyIcon()
 {
 	DWORD value = 0, cbValue = sizeof(value);
-	LOG_IF_WIN32_ERROR(RegGetValueW(HKEY_CURRENT_USER, LR"(Software\Microsoft\Windows\CurrentVersion\Themes\Personalize)", L"AppsUseLightTheme", RRF_RT_REG_DWORD, nullptr, &value, &cbValue));
+	LOG_IF_WIN32_ERROR(RegGetValueW(HKEY_CURRENT_USER, LR"(Software\Microsoft\Windows\CurrentVersion\Themes\Personalize)", L"SystemUsesLightTheme", RRF_RT_REG_DWORD, nullptr, &value, &cbValue));
 	g_nid.hIcon = value != 0 ? g_hIconLight : g_hIconDark;
 
 	if (!Shell_NotifyIconW(NIM_MODIFY, &g_nid))
