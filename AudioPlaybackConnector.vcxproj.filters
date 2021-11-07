@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="AudioPlaybackConnector.svg" />
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="AudioPlaybackConnector.manifest">

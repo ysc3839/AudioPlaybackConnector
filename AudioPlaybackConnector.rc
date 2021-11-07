@@ -18,7 +18,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// Neutral resources
+// 非特定语言 resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
 LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
@@ -70,8 +70,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,3,1,0
- PRODUCTVERSION 1,3,1,0
+ FILEVERSION 1,4,0,0
+ PRODUCTVERSION 1,4,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -88,12 +88,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "Richard Yu"
             VALUE "FileDescription", "AudioPlaybackConnector"
-            VALUE "FileVersion", "1.3.1.0"
+            VALUE "FileVersion", "1.4.0.0"
             VALUE "InternalName", "AudioPlaybackConnector.exe"
             VALUE "LegalCopyright", "Copyright (C) 2020 Richard Yu"
             VALUE "OriginalFilename", "AudioPlaybackConnector.exe"
             VALUE "ProductName", "AudioPlaybackConnector"
-            VALUE "ProductVersion", "1.3.1.0"
+            VALUE "ProductVersion", "1.4.0.0"
         END
     END
     BLOCK "VarFileInfo"
@@ -110,7 +110,7 @@ END
 
 1                       SVG                     "AudioPlaybackConnector.svg"
 
-#endif    // Neutral resources
+#endif    // 非特定语言 resources
 /////////////////////////////////////////////////////////////////////////////
 
 
