@@ -8,6 +8,11 @@ winrt::fire_and_forget ConnectDevice(DevicePicker, std::wstring_view);
 void SetupDevicePicker();
 void SetupSvgIcon();
 void UpdateNotifyIcon();
+bool GetStartupStatus();
+void SetStartupStatus(bool status);
+
+static const wchar_t startupKeyName[] = LR"(Software\Microsoft\Windows\CurrentVersion\Run)";
+static const wchar_t appName[] = L"AudioPlaybackConnector";
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	_In_opt_ HINSTANCE hPrevInstance,
@@ -240,6 +245,28 @@ void SetupMenu()
 		winrt::Windows::System::Launcher::LaunchUriAsync(Uri(L"ms-settings:bluetooth"));
 	});
 
+	FontIcon checkedIcon, uncheckedIcon;
+	checkedIcon.Glyph(L"\xE73E");
+
+	MenuFlyoutItem startupItem;
+	startupItem.Text(_(L"Run at login"));
+	if (GetStartupStatus()) {
+		startupItem.Icon(checkedIcon);
+	}
+	else {
+		startupItem.Icon(uncheckedIcon);
+	}
+	startupItem.Click([checkedIcon, uncheckedIcon](const auto& sender, const auto&) {
+		MenuFlyoutItem self = sender.as<MenuFlyoutItem>();
+		if (GetStartupStatus()) {
+			SetStartupStatus(false);
+			self.Icon(uncheckedIcon);
+		} else {
+			SetStartupStatus(true);
+			self.Icon(checkedIcon);
+		}
+	});
+
 	FontIcon closeIcon;
 	closeIcon.Glyph(L"\xE8BB");
 
@@ -272,6 +299,7 @@ void SetupMenu()
 
 	MenuFlyout menu;
 	menu.Items().Append(settingsItem);
+	menu.Items().Append(startupItem);
 	menu.Items().Append(exitItem);
 	menu.Opened([](const auto& sender, const auto&) {
 		auto menuItems = sender.as<MenuFlyout>().Items();
@@ -449,3 +477,49 @@ void UpdateNotifyIcon()
 		}
 	}
 }
+
+bool GetStartupStatus() {
+	wchar_t pFileName[MAX_PATH] = { 0 };
+	GetModuleFileName(NULL, pFileName, MAX_PATH);
+	
+	HKEY hKey;
+	if (RegOpenKeyExW(HKEY_CURRENT_USER, startupKeyName,
+		0, KEY_READ, &hKey) == ERROR_SUCCESS) {
+
+		DWORD pathLength = MAX_PATH * sizeof(wchar_t);
+		wchar_t storedPath[MAX_PATH] = { 0 };
+		RegQueryValueExW(hKey, appName, 0, nullptr, (LPBYTE)storedPath, &pathLength);
+
+		RegCloseKey(hKey);
+
+		if (StrCmpW(pFileName, storedPath) == 0) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+void SetStartupStatus(bool status) {
+	wchar_t pFileName[MAX_PATH] = { 0 };
+	GetModuleFileName(NULL, pFileName, MAX_PATH);
+	
+	HKEY hKey;
+	if (RegOpenKeyExW(HKEY_CURRENT_USER, startupKeyName,
+		0, KEY_WRITE, &hKey) == ERROR_SUCCESS) {
+		
+		if (status) {
+			LSTATUS stat = RegSetValueExW(hKey, appName, 
+				0, REG_SZ, (LPBYTE)pFileName, lstrlenW(pFileName) * sizeof(wchar_t));
+			if (stat != ERROR_SUCCESS) {
+				return;
+			}
+		}
+		else {
+			LOG_IF_WIN32_ERROR(RegDeleteValueW(hKey, appName));
+		}
+
+		RegCloseKey(hKey);
+	}
+}
+
